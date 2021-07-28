@@ -8,6 +8,7 @@ namespace Day2
         {
             Console.WriteLine("Hi");
             Console.WriteLine("Hello World!");
+            Console.WriteLine("heyy");
         }
     }
 }
