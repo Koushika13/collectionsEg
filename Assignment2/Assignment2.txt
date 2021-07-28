@@ -1,0 +1,289 @@
+--1
+namespace Assignment2
+{
+    class Vehicle
+    {
+        protected int regNumber { get; set; }
+        protected double speed { get; set; }
+        protected string color { get; set; }
+        protected string ownerName { get; set; }
+        internal Vehicle(int regNumber, double speed, string color, string ownerName)
+        {
+            this.regNumber = regNumber;
+            this.speed = speed;
+            this.color = color;
+            this.ownerName = ownerName;
+        }
+
+        protected internal void showData()
+        {
+            Console.WriteLine("This is a Vehicle");
+        }
+
+
+    }
+
+    class Bus : Vehicle
+    {
+        int routeNumber { get; set; }
+
+        internal Bus(int regNumber, double speed, string color, string ownerName, int routeNumber):base(regNumber,speed,color,ownerName)
+        {
+            this.routeNumber = routeNumber;
+        }
+
+        public void showData1()
+        {
+            showData();
+            Console.WriteLine(" Registration Number is:{0} || Speed is: {1} || Color is :{2} || Owner Name: {3} ,Route Number is: {4} ", regNumber,regNumber,speed,color,ownerName, routeNumber);
+        }
+    }
+
+    class   Car : Vehicle
+    {
+        string manufacturerName { get; set; }
+
+        internal Car(int regNumber, double speed, string color, string ownerName, string manufactureName) : base(regNumber, speed, color, ownerName)
+        {
+            this.manufacturerName = manufacturerName;
+        }
+
+        public void showData2()
+        {
+            showData();
+            Console.WriteLine(" Registration Number is:{0} || Speed is: {1} || Color is :{2} || Owner Name: {3} ,Man is: {4} ", regNumber, regNumber, speed, color, ownerName, manufacturerName);
+        }
+    }
+
+    class InheritanceA
+    {
+        static void Main()
+        {
+            Bus bus = new Bus(1, 66, "Orange", "Akhil",22);
+            bus.showData1();
+
+            Car car = new Car(1, 66, "Orange", "Akhil", "Hyundai");
+            car.showData2();
+        }
+    }
+}
+
+--2
+namespace Assignment2
+{
+     abstract class Car1
+    {
+        int regNo { get; set; }
+
+        public void openTank()
+        {
+            regNo = 1;
+        }
+
+        public abstract void steering(int direction, int angle);
+        public abstract void braking(int force);
+
+       
+    }
+
+    class Tata : Car1
+    {
+        public override void steering(int direction, int angle)
+        {
+           
+            Console.WriteLine("Direction is {0} || Angle is{1}", direction,angle);
+        }
+
+        public override void braking(int force)
+        {
+            force = 50;
+            Console.WriteLine("Force is {0}", force);
+        }
+    }
+
+    class Mahindra : Car1
+    {
+        public override void steering(int direction, int angle)
+        {
+            Console.WriteLine("hey");
+        }
+
+        public override void braking(int force)
+        {
+            Console.WriteLine("bye");
+        }
+    }
+
+    class abstracteg
+    {
+        static void Main()
+        {
+            Tata tata = new Tata();
+            tata.braking(10);
+            tata.steering(10,30);
+
+            Mahindra mahindra = new Mahindra();
+            mahindra.braking(10);
+            mahindra.steering(10, 30);
+
+
+        }
+    }
+}
+
+--3
+namespace Assignment2
+{
+    class GetMarks
+    {
+        static void Main()
+        {
+            A a = new A(65, 85, 99);
+            a.getPercentage();
+
+            B b = new B(45, 60, 75, 80);
+            b.getPercentage();
+        }
+    }
+
+    abstract class Marks
+    {
+        abstract public void getPercentage();
+    }
+
+    class A : Marks
+    {
+             
+        int sub1 { get; set; }
+        int sub2 { get; set; }
+        int sub3 { get; set; }
+
+        public A(int sub1, int sub2, int sub3)
+        {
+            this.sub1 = sub1;
+            this.sub2 = sub2;
+            this.sub3 = sub3;
+        }
+        public override void getPercentage()
+        {
+            int sumA;
+            double percentmarksA;
+            sumA = (sub1 + sub2 + sub3) ;
+            percentmarksA = sumA / 3;
+            Console.WriteLine("A percentage: {0}", percentmarksA);
+            
+        }
+    }
+
+    class B : Marks
+    {
+
+        int sub1 { get; set; }
+        int sub2 { get; set; }
+        int sub3 { get; set; }
+
+        int sub4 { get; set; }
+
+        public B(int sub1, int sub2, int sub3,int sub4)
+        {
+            this.sub1 = sub1;
+            this.sub2 = sub2;
+            this.sub3 = sub3;
+            this.sub4 = sub4;
+        }
+        public override void getPercentage()
+        {
+            int sumB;
+            double percentmarksB;
+            sumB = (sub1 + sub2 + sub3 + sub4);
+            percentmarksB = sumB / 4;
+            Console.WriteLine("B percentage: {0}", percentmarksB);
+
+        }
+    }
+
+}
+
+--4
+
+namespace Assignment2
+{
+    class StudentDet
+    {
+        static void Main()
+        {
+            Undergraduate undergraduate = new Undergraduate("Koushika", 1, 65);
+            Console.WriteLine(undergraduate.isPassed(65));
+
+            Graduate graduate = new Graduate("Koushika", 2, 85);
+            Console.WriteLine(graduate.isPassed(85));
+        }
+    }
+
+    abstract class Student
+    {
+        internal string Name;
+        internal int studentId;
+        internal int Grade;
+
+        public Student(string Name, int studentId, int Grade)
+        {
+            this.Name = Name;
+            this.studentId = studentId;
+            this.Grade = Grade;
+        }
+
+        public abstract bool isPassed(int Grade);
+    }  
+
+    class Undergraduate : Student
+    {
+
+        public Undergraduate(string Name, int studentId, int Grade) : base(Name, studentId, Grade)
+        {
+            this.Name = Name;
+            this.studentId = studentId;
+            this.Grade = Grade;
+
+        }
+
+        public override bool isPassed(int Grade)
+        {
+            if (Grade > 70)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+    }
+
+    class Graduate : Student
+    {
+        public Graduate(string Name, int studentId, int Grade) : base(Name, studentId, Grade)
+        {
+            this.Name = Name;
+            this.studentId = studentId;
+            this.Grade = Grade;
+
+        }
+
+        public override bool isPassed(int Grade)
+        {
+            if (Grade > 80)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+
+}
